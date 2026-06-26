@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { PricingProvider, usePricing } from "./PricingContext";
+import { PricingProvider } from "./PricingContext";
 import { BillingToggle } from "./components/BillingToggle";
 import { CurrencySwitcher } from "./components/CurrencySwitcher";
 import { PricingCard } from "./components/PricingCard";

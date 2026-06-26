@@ -71,7 +71,7 @@ export const StickyNav: React.FC = () => {
         {/* Logo */}
         <a
           href="#"
-          className="flex items-center gap-2 group outline-none"
+          className="flex items-center gap-2 group focus-visible:ring-2 focus-visible:ring-primary-accent rounded-lg focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="Veylon Homepage"
         >
           <Cube16Solid className="text-primary-accent transition-transform duration-300 group-hover:rotate-12" size={28} />
@@ -97,13 +97,13 @@ export const StickyNav: React.FC = () => {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer flex items-center justify-center mr-1"
+            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer flex items-center justify-center mr-1 focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none"
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
           >
             {theme === "light" ? <MoonIcon size={20} /> : <SunIcon size={20} />}
           </button>
           <button
-            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer"
+            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none"
             aria-label="Search"
           >
             <SearchIcon size={20} />
@@ -120,14 +120,14 @@ export const StickyNav: React.FC = () => {
         <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={toggleTheme}
-            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer flex items-center justify-center"
+            className="text-muted-text hover:text-primary-accent p-2 rounded-md transition-colors duration-200 cursor-pointer flex items-center justify-center focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none"
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
           >
             {theme === "light" ? <MoonIcon size={20} /> : <SunIcon size={20} />}
           </button>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-foreground hover:text-primary-accent p-2 rounded-md focus:outline-none cursor-pointer"
+            className="text-foreground hover:text-primary-accent p-2 rounded-md focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none cursor-pointer"
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >

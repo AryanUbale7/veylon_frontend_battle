@@ -12,10 +12,28 @@ interface PriceTextProps {
 
 export const PriceText: React.FC<PriceTextProps> = ({ tierId }) => {
   const { currency, billingCycle } = usePricing();
-  const meta = CURRENCY_META[currency];
-  const derivedPrice = getDisplayPrice(tierId, currency, billingCycle);
-  const formattedPrice = formatCurrency(derivedPrice, currency, meta.locale);
-  const periodText = billingCycle === "monthly" ? "/mo" : "/yr";
+  
+  let formattedPrice = "Contact Us";
+  let periodText = "";
+  let equivalentText = "";
+  let isError = false;
+
+  try {
+    const meta = CURRENCY_META[currency];
+    if (!meta) {
+      throw new Error(`Currency metadata not found for "${currency}"`);
+    }
+    const derivedPrice = getDisplayPrice(tierId, currency, billingCycle);
+    formattedPrice = formatCurrency(derivedPrice, currency, meta.locale);
+    periodText = billingCycle === "monthly" ? "/mo" : "/yr";
+    if (billingCycle === "annual") {
+      equivalentText = `(${formatCurrency(derivedPrice / 12, currency, meta.locale)}/mo equivalent)`;
+    }
+  } catch {
+    isError = true;
+    formattedPrice = "Contact Us";
+    periodText = "";
+  }
 
   return (
     <div className="mb-6 flex flex-col items-start gap-1">
@@ -23,13 +41,15 @@ export const PriceText: React.FC<PriceTextProps> = ({ tierId }) => {
         <span className="text-4xl md:text-5xl font-mono font-black text-foreground tracking-tight">
           {formattedPrice}
         </span>
-        <span className="text-sm font-mono font-bold text-muted-text/60 ml-1.5 uppercase">
-          {periodText}
-        </span>
+        {periodText && (
+          <span className="text-sm font-mono font-bold text-muted-text/60 ml-1.5 uppercase">
+            {periodText}
+          </span>
+        )}
       </div>
-      {billingCycle === "annual" ? (
+      {billingCycle === "annual" && !isError ? (
         <span className="text-xs font-mono font-bold text-secondary-accent uppercase">
-          ({formatCurrency(derivedPrice / 12, currency, meta.locale)}/mo equivalent)
+          {equivalentText}
         </span>
       ) : (
         <span className="text-xs font-mono font-bold text-transparent select-none uppercase">

@@ -51,7 +51,7 @@ export const Accordion: React.FC = () => {
                 aria-expanded={isActive}
                 aria-controls={`showcase-panel-${item.id}`}
                 onClick={() => setActiveId(isActive ? null : item.id)}
-                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-mono font-bold tracking-wide uppercase text-sm text-foreground cursor-pointer focus:outline-none focus-visible:bg-white/5"
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-mono font-bold tracking-wide uppercase text-sm text-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none focus-visible:bg-white/5"
               >
                 <div className="flex items-center gap-3.5">
                   <div className={cn(

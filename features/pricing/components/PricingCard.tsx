@@ -81,4 +81,5 @@ export const PricingCard: React.FC<PricingCardProps> = React.memo(({
     </div>
   );
 });
+PricingCard.displayName = "PricingCard";
 export default PricingCard;

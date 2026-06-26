@@ -50,7 +50,7 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${item.id}`}
                   onClick={() => toggleItem(item.id)}
-                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-mono font-bold tracking-wide uppercase text-sm md:text-base text-foreground cursor-pointer focus:outline-none focus-visible:bg-white/5"
+                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-mono font-bold tracking-wide uppercase text-sm md:text-base text-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:outline-none focus-visible:bg-white/5"
                 >
                   <span className={cn("transition-colors duration-300", isOpen ? "text-primary-accent" : "text-foreground")}>
                     {item.question}
