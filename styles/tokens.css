@@ -1,0 +1,52 @@
+:root {
+  /* Organizer-provided palette tokens */
+  --arctic-powder: #F1F6F4;
+  --mystic-mint: #D9E8E2;
+  --oceanic-noir: #172B36;
+  --nocturnal-expedition: #114C5A;
+  --forsythia: #FFC801;
+  --deep-saffron: #FF9932;
+
+  /* Default dark mode theme semantic mappings (premium dark aesthetic) */
+  --background: #0F1F28; /* Deeper oceanic noir for richer dark mode */
+  --foreground: var(--arctic-powder);
+  --muted-text: #C5D8D0; /* Slightly brighter mint for better readability */
+  
+  --card-bg: #162A35; /* Rich dark teal card surface */
+  --card-bg-elevated: #1C3340; /* Elevated surface for nested cards */
+  --card-border: rgba(17, 76, 90, 0.5); /* Slightly more visible borders */
+  --card-border-hover: rgba(255, 200, 1, 0.45); /* Translucent Forsythia */
+
+  --primary-accent: var(--forsythia);
+  --secondary-accent: var(--deep-saffron);
+  --accent-dark: var(--nocturnal-expedition);
+
+  --accent-premium: #0F6B5C; /* defined globally for safety */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color-strong: rgba(0, 0, 0, 0.75);
+  --glow-accent: rgba(255, 200, 1, 0.08); /* Subtle gold glow for depth */
+
+  /* Common utilities */
+  --focus-ring: var(--forsythia);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Parallel Light Mode Theme */
+[data-theme="light"], .light {
+  --background: #FBF8F2; /* warm ivory --bg-primary */
+  --foreground: var(--oceanic-noir); /* --text-primary */
+  --muted-text: var(--nocturnal-expedition); /* --text-secondary */
+
+  --card-bg: var(--arctic-powder); /* --surface-card */
+  --card-border: rgba(17, 76, 90, 0.15);
+  --card-border-hover: var(--accent-premium);
+
+  --primary-accent: var(--forsythia); /* unchanged */
+  --secondary-accent: var(--deep-saffron); /* unchanged */
+  --accent-dark: var(--mystic-mint); /* --bg-secondary */
+
+  --shadow-color: rgba(23, 43, 54, 0.08); /* Oceanic Noir based shadow */
+  --shadow-color-strong: rgba(23, 43, 54, 0.14);
+
+  --focus-ring: var(--accent-premium);
+}

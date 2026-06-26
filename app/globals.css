@@ -1,0 +1,583 @@
+@import "../styles/tokens.css";
+@import "tailwindcss";
+
+@theme {
+  --color-arctic-powder: var(--arctic-powder);
+  --color-mystic-mint: var(--mystic-mint);
+  --color-oceanic-noir: var(--oceanic-noir);
+  --color-nocturnal-expedition: var(--nocturnal-expedition);
+  --color-forsythia: var(--forsythia);
+  --color-deep-saffron: var(--deep-saffron);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-text: var(--muted-text);
+  
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-border-hover: var(--card-border-hover);
+  
+  --color-primary-accent: var(--primary-accent);
+  --color-secondary-accent: var(--secondary-accent);
+  --color-accent-dark: var(--accent-dark);
+  
+  --color-accent-premium: var(--accent-premium);
+  --color-shadow-color: var(--shadow-color);
+  --color-shadow-color-strong: var(--shadow-color-strong);
+  
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+/* Custom global overrides */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Skip to content link style */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--forsythia);
+  color: var(--oceanic-noir);
+  font-weight: 700;
+  font-family: var(--font-jetbrains-mono), monospace;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--forsythia);
+  outline-offset: 2px;
+}
+
+/* Custom interactive active elements focus visible rings */
+*:focus-visible {
+  outline: 2px solid var(--forsythia);
+  outline-offset: 4px;
+}
+
+/* Utility animations (using pure CSS transitions as requested) */
+.transition-all-smooth {
+  transition: all 150ms cubic-bezier(0, 0, 0.2, 1); /* 150ms ease-out */
+}
+
+/* Bento card lift transitions */
+.bento-card-hover {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1), border-color 150ms cubic-bezier(0, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+.bento-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-border-hover);
+  box-shadow: 0 10px 25px -5px rgba(255, 200, 1, 0.1), 0 8px 10px -6px rgba(255, 200, 1, 0.05);
+}
+
+/* Custom styles for accordion items with scrollHeight measured max-height */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms cubic-bezier(0.4, 0, 0.2, 1); /* 350ms ease-in-out */
+  opacity: 0;
+}
+
+.accordion-content.expanded {
+  max-height: var(--measured-height, 1000px);
+  opacity: 1;
+}
+
+/* Premium Linear/Vercel-inspired Mesh & Dot backgrounds */
+.bg-mesh-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(17, 76, 90, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 76, 90, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 200, 1, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* ==========================================
+   HERO GRID EFFECT
+   ========================================== */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Primary fine grid lines */
+.hero-grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(17, 76, 90, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 76, 90, 0.18) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Secondary accent grid — larger cells with warm tint */
+.hero-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 200, 1, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 200, 1, 0.06) 1px, transparent 1px);
+  background-size: 180px 180px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Intersection dot glow layer */
+.hero-grid-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 200, 1, 0.2) 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.15) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.15) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Animated sweeping highlight across the grid */
+@keyframes grid-sweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.hero-grid-sweep {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-grid-sweep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 200, 1, 0.04) 35%,
+    rgba(255, 200, 1, 0.1) 50%,
+    rgba(255, 200, 1, 0.04) 65%,
+    transparent 100%
+  );
+  animation: grid-sweep 8s ease-in-out infinite;
+}
+
+/* Light mode overrides */
+[data-theme="light"] .hero-grid-bg::before {
+  background-image:
+    linear-gradient(to right, rgba(17, 76, 90, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 76, 90, 0.07) 1px, transparent 1px);
+}
+
+[data-theme="light"] .hero-grid-bg::after {
+  background-image:
+    linear-gradient(to right, rgba(15, 107, 92, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 107, 92, 0.05) 1px, transparent 1px);
+}
+
+[data-theme="light"] .hero-grid-dots {
+  background-image: radial-gradient(circle, rgba(15, 107, 92, 0.12) 1px, transparent 1px);
+}
+
+[data-theme="light"] .hero-grid-sweep::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(15, 107, 92, 0.03) 40%,
+    rgba(15, 107, 92, 0.06) 50%,
+    rgba(15, 107, 92, 0.03) 60%,
+    transparent 100%
+  );
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  position: relative;
+  background: rgba(22, 42, 53, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(17, 76, 90, 0.35);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.35), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.glass-card-interactive {
+  position: relative;
+  background: rgba(22, 42, 53, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(17, 76, 90, 0.35);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.3), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.glass-card-interactive::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 200, 1, 0.2), transparent 40%, transparent 60%, rgba(255, 153, 50, 0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.glass-card-interactive:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 200, 1, 0.35);
+  background: rgba(28, 51, 64, 0.75);
+  box-shadow: 
+    0 20px 40px -8px rgba(0, 0, 0, 0.55), 
+    0 8px 20px -6px rgba(255, 200, 1, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card-interactive:hover::before {
+  opacity: 1;
+}
+
+/* Floating Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* AI Workflow flowing light connector */
+@keyframes flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-flow-line {
+  background: linear-gradient(90deg, rgba(17, 76, 90, 0.15) 0%, var(--forsythia) 45%, rgba(255, 153, 50, 0.8) 55%, rgba(17, 76, 90, 0.15) 100%);
+  background-size: 200% auto;
+  animation: flow 2.5s linear infinite;
+}
+
+/* Radial spotlight glows */
+.radial-glow-spot {
+  background: radial-gradient(circle, rgba(17, 76, 90, 0.35) 0%, rgba(15, 31, 40, 0) 70%);
+}
+
+.radial-glow-accent {
+  background: radial-gradient(circle, rgba(255, 200, 1, 0.08) 0%, rgba(15, 31, 40, 0) 55%);
+}
+
+/* Bento card mouse glow tracking styles */
+.bento-glowing-card {
+  position: relative;
+}
+
+.bento-glowing-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(255, 200, 1, 0.28),
+    transparent 50%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: xor; /* fallback */
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: 10;
+}
+
+.bento-glowing-card:hover::after {
+  opacity: 1;
+}
+
+/* Pricing card rotating border glow */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-gradient {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+.pricing-card-recommended {
+  position: relative;
+}
+
+.pricing-card-recommended::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--forsythia) 0%,
+    var(--deep-saffron) 35%,
+    var(--nocturnal-expedition) 70%,
+    var(--forsythia) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: xor; /* fallback */
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: rotate-gradient 6s linear infinite;
+  z-index: 1;
+}
+
+/* Handles prefers-reduced-motion: reduce constraints */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 20ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 20ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================
+   ADDITIVE LIGHT MODE THEME OVERRIDES
+   ========================================== */
+
+/* Smooth transitions on theme switch */
+body, 
+header, 
+footer, 
+.glass-card, 
+.glass-card-interactive, 
+button, 
+a, 
+section,
+svg,
+span,
+p,
+div {
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1), 
+              color 200ms cubic-bezier(0, 0, 0.2, 1), 
+              border-color 200ms cubic-bezier(0, 0, 0.2, 1),
+              box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Adjust dot-grid opacity and color in light mode to be subtle but visible */
+[data-theme="light"] .bg-dot-pattern {
+  background-image: radial-gradient(rgba(17, 76, 90, 0.08) 1px, transparent 0);
+}
+
+/* Glass card lightness, border, and shadows in light mode */
+[data-theme="light"] .glass-card {
+  background: rgba(251, 248, 242, 0.7); /* ASSUMPTION: Lighter glass background for ivory backdrop */
+  border: 1px solid rgba(17, 76, 90, 0.12);
+  box-shadow: 
+    0 4px 30px var(--shadow-color), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .glass-card-interactive {
+  background: rgba(251, 248, 242, 0.7); /* ASSUMPTION: Lighter glass background for readability */
+  border: 1px solid rgba(17, 76, 90, 0.12);
+  box-shadow: 
+    0 4px 30px var(--shadow-color), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .glass-card-interactive:hover {
+  background: rgba(251, 248, 242, 0.85);
+  border-color: var(--accent-premium);
+  box-shadow: 
+    0 15px 35px -5px var(--shadow-color-strong), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+/* Light mode recommended tier border treatment - deep emerald-teal instead of gold */
+[data-theme="light"] .pricing-card-recommended::before {
+  background: var(--accent-premium);
+  animation: none; /* Disable rotating gold gradient in light mode */
+  box-shadow: 0 0 15px rgba(15, 107, 92, 0.12);
+}
+
+/* Ensure focus outline uses signature accent-premium in light mode */
+[data-theme="light"] *:focus-visible {
+  outline: 2px solid var(--accent-premium);
+  outline-offset: 4px;
+}
+
+/* Custom styling for the recommended pricing card badge */
+.pricing-card-badge {
+  background: var(--card-bg) !important;
+  z-index: 20 !important;
+}
+
+[data-theme="light"] .pricing-card-badge {
+  color: var(--accent-premium) !important;
+  border-color: rgba(15, 107, 92, 0.4) !important;
+}
+
+/* Dark mode section separator accent glow */
+section[id] {
+  position: relative;
+}
+
+section[id]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 200, 1, 0.12), transparent);
+  pointer-events: none;
+}
+
+[data-theme="light"] section[id]::before {
+  background: linear-gradient(90deg, transparent, rgba(15, 107, 92, 0.1), transparent);
+}
+
+/* ==========================================
+   SCROLL REVEAL ENTRY TRANSITIONS
+   ========================================== */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition-property: opacity, transform;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-item.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================
+   INFINITE SCROLLING MARQUEE
+   ========================================== */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
