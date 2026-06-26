@@ -581,3 +581,89 @@ section[id]::before {
   }
 }
 
+/* ==========================================
+   LOGO PRELOADER KEYFRAMES & CLASSES
+   ========================================== */
+@keyframes top-face-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes left-face-in {
+  0% {
+    opacity: 0;
+    transform: translate(-20px, 12px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes right-face-in {
+  0% {
+    opacity: 0;
+    transform: translate(20px, 12px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes letter-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes preloader-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.preloader-top-face {
+  transform-origin: center;
+  animation: top-face-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.preloader-left-face {
+  transform-origin: center;
+  animation: left-face-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 150ms;
+  opacity: 0;
+}
+
+.preloader-right-face {
+  transform-origin: center;
+  animation: right-face-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 300ms;
+  opacity: 0;
+}
+
+.preloader-cube {
+  animation: preloader-bounce 3.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.animate-letter-reveal {
+  animation: letter-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

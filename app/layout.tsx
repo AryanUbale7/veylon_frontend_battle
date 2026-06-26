@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LogoPreloader } from "@/components/LogoPreloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -66,6 +67,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased font-sans text-foreground bg-background">
+        <LogoPreloader />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

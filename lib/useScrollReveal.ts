@@ -9,7 +9,9 @@ export function useScrollReveal(staggerMs = 60, threshold = 0.15) {
       if (containerRef.current) {
         const items = containerRef.current.querySelectorAll(".reveal-item");
         items.forEach((item) => {
-          (item as HTMLElement).classList.add("reveal-visible");
+          const el = item as HTMLElement;
+          el.classList.add("reveal-visible");
+          el.dataset.revealed = "true";
         });
       }
       return;
@@ -26,7 +28,10 @@ export function useScrollReveal(staggerMs = 60, threshold = 0.15) {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement;
           // Set delay property for stagger
-          el.style.setProperty("--reveal-delay", `${index * staggerMs}ms`);
+          const delay = `${index * staggerMs}ms`;
+          el.dataset.delay = delay;
+          el.dataset.revealed = "true";
+          el.style.setProperty("--reveal-delay", delay);
           el.classList.add("reveal-visible");
           observer.unobserve(el); // Reveal once and unobserve
           index++;
@@ -37,7 +42,17 @@ export function useScrollReveal(staggerMs = 60, threshold = 0.15) {
     const container = containerRef.current;
     if (container) {
       const items = container.querySelectorAll(".reveal-item");
-      items.forEach((item) => observer.observe(item));
+      items.forEach((item) => {
+        const el = item as HTMLElement;
+        if (el.dataset.revealed === "true") {
+          el.classList.add("reveal-visible");
+          if (el.dataset.delay) {
+            el.style.setProperty("--reveal-delay", el.dataset.delay);
+          }
+        } else {
+          observer.observe(el);
+        }
+      });
     }
 
     return () => {
@@ -47,6 +62,23 @@ export function useScrollReveal(staggerMs = 60, threshold = 0.15) {
       }
     };
   }, [staggerMs, threshold]);
+
+  // Declarative restoration on every commit/re-render to prevent React class name reconciliation from wiping out classes.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const items = container.querySelectorAll(".reveal-item");
+    items.forEach((item) => {
+      const el = item as HTMLElement;
+      if (el.dataset.revealed === "true") {
+        el.classList.add("reveal-visible");
+        if (el.dataset.delay) {
+          el.style.setProperty("--reveal-delay", el.dataset.delay);
+        }
+      }
+    });
+  });
 
   return containerRef;
 }
