@@ -184,18 +184,18 @@ export const Hero: React.FC = () => {
             {/* Window Workspace */}
             <div className="p-6 h-[calc(100%-40px)] flex flex-col justify-between bg-dot-pattern">
               {/* Top Metrics Row */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="glass-card p-3 rounded-lg border border-card-border/35 flex flex-col gap-1">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                <div className="glass-card p-2 sm:p-3 rounded-lg border border-card-border/35 flex flex-col gap-1 overflow-hidden">
                   <span className="font-mono text-[8px] text-muted-text uppercase">TPS</span>
-                  <span className="font-mono text-lg font-black text-primary-accent">1,480</span>
+                  <span className="font-mono text-sm sm:text-lg font-black text-primary-accent tracking-tight truncate">1,480</span>
                 </div>
-                <div className="glass-card p-3 rounded-lg border border-card-border/35 flex flex-col gap-1">
+                <div className="glass-card p-2 sm:p-3 rounded-lg border border-card-border/35 flex flex-col gap-1 overflow-hidden">
                   <span className="font-mono text-[8px] text-muted-text uppercase">ERR</span>
-                  <span className="font-mono text-lg font-black text-secondary-accent">0</span>
+                  <span className="font-mono text-sm sm:text-lg font-black text-secondary-accent tracking-tight truncate">0</span>
                 </div>
-                <div className="glass-card p-3 rounded-lg border border-card-border/35 flex flex-col gap-1">
+                <div className="glass-card p-2 sm:p-3 rounded-lg border border-card-border/35 flex flex-col gap-1 overflow-hidden">
                   <span className="font-mono text-[8px] text-muted-text uppercase">LAT</span>
-                  <span className="font-mono text-lg font-black text-muted-text">12ms</span>
+                  <span className="font-mono text-sm sm:text-lg font-black text-muted-text tracking-tight truncate">12ms</span>
                 </div>
               </div>
 
