@@ -528,6 +528,14 @@ section[id]::before {
   transform: translateY(0);
 }
 
+@media (max-width: 1023px) {
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ==========================================
    INFINITE SCROLLING MARQUEE
    ========================================== */
